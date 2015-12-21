@@ -29,7 +29,7 @@ public class User extends Entity<User> {
 
 
 
-    User() {
+    public User() {
     }
 
     public User(String username, String password) {
