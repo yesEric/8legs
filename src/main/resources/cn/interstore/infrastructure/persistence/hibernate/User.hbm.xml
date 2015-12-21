@@ -11,6 +11,7 @@
         </id>
 
         <property name="username" column="username" unique="true"/>
+        <property name="fullName" column="full_name" not-null="true"/>
         <property name="password" column="pwd" not-null="true"/>
         <property name="status" column="status" not-null="true">
             <type name="org.hibernate.type.EnumType">

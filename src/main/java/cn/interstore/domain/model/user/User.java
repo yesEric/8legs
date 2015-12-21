@@ -13,6 +13,8 @@ public class User extends Entity<User> {
     String id;
 
     String username;
+
+    String fullName;
     String password;
 
     /**
