@@ -1,13 +1,9 @@
 /**
  * <p>
- * The domain model, services and repository interfaces. This is the central part of the
- * application. The ubiquitous language is used in classes, interfaces and method signatures,
- * and every concept in here is familiar to a expert in the cargo shiping domain.
+ *     这里包含了领域模型，领域服务和Repository的接口，是应用程序的核心层。所有的领域通业务逻辑都在这里实现。
  * </p>
  * <p>
- * There is no infrastructure or user interface related code here, except for things like
- * transactional and security metadata which is likely to be relevant to a domain expert
- * ("Either all of foo succeeds or none of it does", "In order to do bar you need to be a Supervisor", and so on).
+ *     注意，这里不包括基础架构技术的实现，也不包括界面UI相关的逻辑（但一些诸如，事务和安全验证等可以放在这里，这些主要从业务的角度出发）。
  * </p>.
  */
 package cn.interstore.domain;

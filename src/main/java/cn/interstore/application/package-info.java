@@ -1,15 +1,12 @@
 /**
  * <p>
- * This is the application layer: code that's needed for the application to
- * performs its tasks. It defines, or is defined by, use cases.
+ *     这里是应用层：用于执行应用的任务。这里的任务是基于用例的。
  * </p>
  * <p>
- * It is thin in terms of knowledge of domain business logic,
- * although it may be large in terms of lines of code.
- * It coordinates the domain layer objects to perform the actual tasks.
+ *     这一层在领域模型中是非常薄的一层逻辑，它基于领域模型层的对象执行实际的业务逻辑。
  * </p>
  * <p>
- * This layer is suitable for spanning transactions, security checks and high-level logging.
- * </p>.
+ *     这一层一般用于事务的控制，安全检查和高级别的日志服务等.
+ * </p>
  */
 package cn.interstore.application;
