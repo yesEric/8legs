@@ -9,14 +9,8 @@
     <session-factory>
         <!-- Properties defined here are shared between test and production -->
         <!--<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>-->
-        <mapping resource="cn/interstore/infrastructure/persistence/hibernate/User.hbm.xml"/>
+        <mapping resource="cn/elegs/infrastructure/persistence/hibernate/User.hbm.xml"/>
 
-        <!--<mapping resource="se/citerus/dddsample/infrastructure/persistence/hibernate/Cargo.hbm.xml" />-->
-        <!--<mapping resource="se/citerus/dddsample/infrastructure/persistence/hibernate/Voyage.hbm.xml" />-->
-        <!--<mapping resource="se/citerus/dddsample/infrastructure/persistence/hibernate/Leg.hbm.xml" />-->
-        <!--<mapping resource="se/citerus/dddsample/infrastructure/persistence/hibernate/Location.hbm.xml" />-->
-        <!--<mapping resource="se/citerus/dddsample/infrastructure/persistence/hibernate/CarrierMovement.hbm.xml" />-->
-        <!--<mapping resource="se/citerus/dddsample/infrastructure/persistence/hibernate/HandlingEvent.hbm.xml" />-->
     </session-factory>
 
 </hibernate-configuration>
