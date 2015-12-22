@@ -10,7 +10,6 @@ import java.util.Date;
  */
 public class User extends Entity<User> {
 
-    String id;
 
     String username;
 
@@ -52,13 +51,7 @@ public class User extends Entity<User> {
         this.fullName = fullName;
     }
 
-    public String getId() {
-        return id;
-    }
 
-    private void setId(String id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
@@ -157,7 +150,6 @@ public class User extends Entity<User> {
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +

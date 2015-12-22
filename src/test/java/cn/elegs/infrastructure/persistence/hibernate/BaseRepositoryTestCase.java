@@ -14,9 +14,9 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
  */
 @ContextConfiguration(locations = {
         "classpath:/spring/application-resources.xml",
-        "classpath:/spring/application-dao.xml"
+        "classpath:/spring/application-persistence.xml"
 })
-public class BaseDaoTestCase extends AbstractTransactionalJUnit4SpringContextTests {
+public class BaseRepositoryTestCase extends AbstractTransactionalJUnit4SpringContextTests {
     @Autowired
     SessionFactory sessionFactory;
 

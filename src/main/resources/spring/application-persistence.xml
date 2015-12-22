@@ -38,6 +38,6 @@
     <context:annotation-config/>
 
     <!-- Activates scanning of @Repository -->
-    <context:component-scan base-package="cn.dps.dao.hibernate"/>
+    <context:component-scan base-package="cn.elegs.infrastructure.persistence.hibernate"/>
 
 </beans>

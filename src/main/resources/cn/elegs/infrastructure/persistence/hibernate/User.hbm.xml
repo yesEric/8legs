@@ -2,16 +2,16 @@
 
 <!DOCTYPE hibernate-mapping PUBLIC
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping default-access="field">
     <class name="cn.elegs.domain.model.user.User" table="t_user">
 
         <id name="id" column="id">
-            <generator class="org.hibernate.id.IdentityGenerator"/>
+            <generator class="org.hibernate.id.UUIDGenerator"/>
         </id>
 
         <property name="username" column="username" unique="true"/>
-        <property name="fullName" column="full_name" not-null="true"/>
+        <property name="fullName" column="full_name"/>
         <property name="password" column="pwd" not-null="true"/>
         <property name="status" column="status" not-null="true">
             <type name="org.hibernate.type.EnumType">

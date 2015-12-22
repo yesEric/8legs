@@ -5,6 +5,17 @@ package cn.elegs.domain.shared;
  */
 public abstract class Entity<T> {
 
+
+    String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     /**
      * 实体的比较方法
      * @param other 要比较的另一个实体
