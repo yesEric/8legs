@@ -1,9 +1,12 @@
 package cn.elegs.domain.model.user;
 
+import cn.elegs.domain.model.role.Role;
 import cn.elegs.domain.shared.Entity;
 import org.apache.commons.lang3.Validate;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 用户对象.
@@ -28,7 +31,15 @@ public class User extends Entity<User> {
 
     Date createdAt;
 
+    Set<Role> roleSet = new HashSet<>();
 
+    public Set<Role> getRoleSet() {
+        return roleSet;
+    }
+
+    public void setRoleSet(Set<Role> roleSet) {
+        this.roleSet = roleSet;
+    }
 
     public User() {
     }

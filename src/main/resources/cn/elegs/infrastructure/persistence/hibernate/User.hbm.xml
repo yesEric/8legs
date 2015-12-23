@@ -26,6 +26,10 @@
             </type>
         </property>
         <property name="createdAt" column="created_at" not-null="true"/>
+        <set name="roleSet" table="t_user_role">
+            <key column="user_id"></key>
+            <many-to-many class="cn.elegs.domain.model.role.Role" column="id"/>
+        </set>
 
     </class>
 </hibernate-mapping>

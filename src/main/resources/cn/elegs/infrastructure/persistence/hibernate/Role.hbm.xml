@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+    <class name="cn.elegs.domain.model.role.Role" table="t_role">
+
+        <id name="id" column="id">
+            <generator class="org.hibernate.id.UUIDGenerator"/>
+        </id>
+
+        <property name="name" column="name" unique="true"/>
+        <property name="description" column="description"/>
+        <property name="roleStatus" column="status" not-null="true">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">cn.elegs.domain.model.role.RoleStatus</param>
+                <param name="type">12</param><!-- 12 is java.sql.Types.VARCHAR -->
+            </type>
+        </property>
+
+        <set name="users" table="t_user_role">
+            <key column="role_id"></key>
+            <many-to-many class="cn.elegs.domain.model.user.User" column="id"/>
+        </set>
+
+        <set name="resourceSet" table="t_role_resource">
+            <key column="role_id"></key>
+            <many-to-many class="cn.elegs.domain.model.role.Resource" column="id"/>
+        </set>
+
+    </class>
+</hibernate-mapping>
+          

@@ -16,7 +16,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
         "classpath:/spring/application-resources.xml",
         "classpath:/spring/application-persistence.xml"
 })
-public class BaseRepositoryTestCase extends AbstractTransactionalJUnit4SpringContextTests {
+public abstract class BaseRepositoryTestCase extends AbstractTransactionalJUnit4SpringContextTests {
     @Autowired
     SessionFactory sessionFactory;
 

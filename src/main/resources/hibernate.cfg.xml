@@ -12,6 +12,9 @@
         <!-- Properties defined here are shared between test and production -->
         <!--<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>-->
         <mapping resource="cn/elegs/infrastructure/persistence/hibernate/User.hbm.xml"/>
+        <mapping resource="cn/elegs/infrastructure/persistence/hibernate/Role.hbm.xml"/>
+        <mapping resource="cn/elegs/infrastructure/persistence/hibernate/Resource.hbm.xml"/>
+
 
     </session-factory>
 
