@@ -13,8 +13,8 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
  * Hibernate 的 Repository 测试基类.
  */
 @ContextConfiguration(locations = {
-        "classpath:/spring/application-resources.xml",
-        "classpath:/spring/application-persistence.xml"
+        "classpath:/spring/context-resources.xml",
+        "classpath:/spring/context-persistence.xml"
 })
 public abstract class BaseRepositoryTestCase extends AbstractTransactionalJUnit4SpringContextTests {
     @Autowired
