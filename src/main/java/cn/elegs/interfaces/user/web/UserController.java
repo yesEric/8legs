@@ -40,8 +40,9 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/save")
     public String save(@ModelAttribute("user") final UserDTO userDTO, final BindingResult errors,
-                       final HttpServletRequest request, final HttpServletResponse response) throws Exception {
-        userServiceFacade.createNewUser(userDTO.getUsername(), userDTO.getPassword());
+                       final HttpServletRequest request, final HttpServletResponse response, Model model) throws Exception {
+        UserDTO user = userServiceFacade.createNewUser(userDTO.getUsername(), userDTO.getPassword());
+        model.addAttribute("user", user);
 
         return "userForm";
     }
