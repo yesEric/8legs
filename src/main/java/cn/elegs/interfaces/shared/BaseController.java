@@ -8,5 +8,5 @@ import org.apache.commons.logging.LogFactory;
  */
 public class BaseController {
 
-    Log log = LogFactory.getLog(getClass());
+    protected Log log = LogFactory.getLog(getClass());
 }

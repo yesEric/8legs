@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
         "classpath:/spring/context-application.xml",
         "classpath:/spring/context-interfaces.xml"
 })
-public class BaseInterfacesTestCase extends AbstractTransactionalJUnit4SpringContextTests {
+public abstract class BaseInterfacesTestCase extends AbstractTransactionalJUnit4SpringContextTests {
     /**
      * A simple logger
      */

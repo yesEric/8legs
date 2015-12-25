@@ -4,6 +4,7 @@ import cn.elegs.interfaces.shared.BaseController;
 import cn.elegs.interfaces.user.facade.UserServiceFacade;
 import cn.elegs.interfaces.user.facade.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,10 +33,14 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/show")
     public String show(@RequestParam("id") String id, Model model) throws Exception {
-
-        UserDTO user = userServiceFacade.getUserById(id);
+        UserDTO user = new UserDTO();
+        try {
+            user = userServiceFacade.getUserById(id);
+        } catch (ObjectRetrievalFailureException e) {
+            log.error("Cannot find user");
+        }
         model.addAttribute("user", user);
-        return "userForm";
+        return "user/userForm";
     }
 
     @RequestMapping(value = "/save")
@@ -44,7 +49,7 @@ public class UserController extends BaseController {
         UserDTO user = userServiceFacade.createNewUser(userDTO.getUsername(), userDTO.getPassword());
         model.addAttribute("user", user);
 
-        return "userForm";
+        return "user/userForm";
     }
 
 
