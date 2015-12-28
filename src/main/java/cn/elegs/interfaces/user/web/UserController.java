@@ -107,8 +107,12 @@ public class UserController extends BaseController {
      * @throws Exception
      */
     @RequestMapping(value = "/remove")
-    public String remove(@RequestParam(value = "id") String userId, Model model) {
-        userServiceFacade.removeUser(userId);
+    public String remove(@RequestParam(value = "id") String userId, Model model, final BindingResult errors) {
+        try {
+            userServiceFacade.removeUser(userId);
+        } catch (DomainException e) {
+            errors.reject(e.getMessage());
+        }
         List<UserDTO> users = userServiceFacade.findAll();
         model.addAttribute("users", users);
         return LIST;

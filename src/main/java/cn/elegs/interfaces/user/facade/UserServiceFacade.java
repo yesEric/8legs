@@ -18,7 +18,7 @@ public interface UserServiceFacade {
 
     UserDTO getUserById(String userId) throws DomainException;
 
-    void removeUser(String userId);
+    void removeUser(String userId) throws DomainException;
 
     UserDTO assignRoleToUser(UserDTO user, String roleId[]) throws DomainException;
 }

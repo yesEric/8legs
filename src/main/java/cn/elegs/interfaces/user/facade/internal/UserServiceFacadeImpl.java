@@ -58,9 +58,9 @@ public class UserServiceFacadeImpl implements UserServiceFacade {
     }
 
     @Override
-    public void removeUser(String userId) {
+    public void removeUser(String userId) throws DomainException {
 
-        userRepository.remove(userId);
+        userService.removeUser(userId);
     }
 
     @Override
