@@ -6,10 +6,12 @@
     <title>User Form</title>
 </head>
 <body>
-<form:form commandName="user" method="post" action="/user/save">
+<form:form commandName="user" method="post" action="/user/save" autocomplete="off">
     <form:hidden path="id"/>
     <spring:bind path="user.username"/>
-    name:<form:input path="username" id="username"/>
+    name:
+    <form:input cssClass="form-control" path="username" id="username"/>
+    <form:errors path="username" cssClass="help-block"/>
     <p/>
     password<form:password path="password" id="password"/>
     <button type="submit">OK</button>

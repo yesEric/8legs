@@ -3,6 +3,7 @@ package cn.elegs.interfaces.user.facade.internal;
 import cn.elegs.application.UserService;
 import cn.elegs.domain.model.user.User;
 import cn.elegs.domain.model.user.UserRepository;
+import cn.elegs.domain.shared.DomainException;
 import cn.elegs.interfaces.user.facade.UserServiceFacade;
 import cn.elegs.interfaces.user.facade.dto.UserDTO;
 import cn.elegs.interfaces.user.facade.internal.assembler.UserDTOAssembler;
@@ -24,7 +25,7 @@ public class UserServiceFacadeImpl implements UserServiceFacade {
     UserRepository userRepository;
 
     @Override
-    public UserDTO createNewUser(String username, String password) {
+    public UserDTO createNewUser(String username, String password) throws DomainException {
         final User user = userService.createNewUser(username, password);
         final UserDTOAssembler assembler = new UserDTOAssembler();
         return assembler.toDTO(user);
@@ -50,7 +51,7 @@ public class UserServiceFacadeImpl implements UserServiceFacade {
     }
 
     @Override
-    public UserDTO getUserById(String userId) {
+    public UserDTO getUserById(String userId) throws DomainException {
         final User user = userRepository.get(userId);
         final UserDTOAssembler assembler = new UserDTOAssembler();
         return assembler.toDTO(user);
@@ -60,5 +61,13 @@ public class UserServiceFacadeImpl implements UserServiceFacade {
     public void removeUser(String userId) {
 
         userRepository.remove(userId);
+    }
+
+    @Override
+    public UserDTO assignRoleToUser(UserDTO userDTO, String[] roleIds) throws DomainException {
+        User user = userRepository.get(userDTO.getId());
+        user = userService.assignRoleToUser(user, roleIds);
+        final UserDTOAssembler assembler = new UserDTOAssembler();
+        return assembler.toDTO(user);
     }
 }

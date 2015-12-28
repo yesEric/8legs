@@ -2,6 +2,7 @@ package cn.elegs.domain.model.role;
 
 import cn.elegs.domain.model.user.User;
 import cn.elegs.domain.shared.Entity;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,6 +15,7 @@ public class Role extends Entity<Role> {
     /**
      * 角色名称
      */
+    @NotBlank
     String name;
     /**
      * 角色描述

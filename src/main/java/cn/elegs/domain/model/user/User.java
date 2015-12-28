@@ -3,9 +3,11 @@ package cn.elegs.domain.model.user;
 import cn.elegs.domain.model.role.Role;
 import cn.elegs.domain.shared.Entity;
 import org.apache.commons.lang3.Validate;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -14,9 +16,12 @@ import java.util.Set;
 public class User extends Entity<User> {
 
 
+    @NotBlank
     String username;
 
+    @NotBlank
     String fullName;
+    @NotBlank
     String password;
 
     /**
@@ -37,13 +42,28 @@ public class User extends Entity<User> {
         return roleSet;
     }
 
-    public void setRoleSet(Set<Role> roleSet) {
+    private void setRoleSet(Set<Role> roleSet) {
         this.roleSet = roleSet;
     }
 
     public User() {
     }
 
+    /**
+     * 给用户分配角色
+     *
+     * @param roleList
+     * @return
+     */
+    public User assignRoles(List<Role> roleList) {
+
+        Set<Role> roles = new HashSet<>();
+        for (Role role : roleList) {
+            roles.add(role);
+        }
+        this.setRoleSet(roles);
+        return this;
+    }
     public User(String username, String password) {
         Validate.notBlank(username,"Username can not be null!");
         Validate.notNull(password,"Password can not be null!");
@@ -61,8 +81,6 @@ public class User extends Entity<User> {
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
-
-
 
     public String getUsername() {
         return username;

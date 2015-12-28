@@ -7,6 +7,7 @@ import cn.elegs.interfaces.shared.BaseDTO;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -28,6 +29,16 @@ public final class UserDTO extends BaseDTO {
     LockStatus locked;
 
     Date createdAt;
+
+    List<RoleDTO> roleDTOs;
+
+    public List<RoleDTO> getRoleDTOs() {
+        return roleDTOs;
+    }
+
+    public void setRoleDTOs(List<RoleDTO> roleDTOs) {
+        this.roleDTOs = roleDTOs;
+    }
 
     Set<Role> roleSet = new HashSet<>();
 

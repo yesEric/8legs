@@ -1,5 +1,6 @@
 package cn.elegs.infrastructure.persistence.hibernate;
 
+import cn.elegs.domain.shared.DomainException;
 import cn.elegs.domain.shared.GenericRepository;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -9,15 +10,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
-import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * 通用Hibernate实现.
@@ -96,14 +97,14 @@ public class GenericRepositoryHibernate<T, PK extends Serializable> implements G
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public T get(PK id) {
+    public T get(PK id) throws DomainException {
         Session sess = getSession();
         IdentifierLoadAccess byId = sess.byId(persistentClass);
         T entity = (T) byId.load(id);
 
         if (entity == null) {
             log.warn("Uh oh, '" + this.persistentClass + "' object with id '" + id + "' not found...");
-            throw new ObjectRetrievalFailureException(this.persistentClass, id);
+            throw new DomainException(this.persistentClass + "' object with id '" + id + "' not found...");
         }
 
         return entity;
@@ -124,8 +125,20 @@ public class GenericRepositoryHibernate<T, PK extends Serializable> implements G
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public T save(T object) {
+    public T save(T object) throws DomainException {
         Session sess = getSession();
+        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
+        Validator validator = validatorFactory.getValidator();
+        Set<ConstraintViolation<T>> validations = validator.validate(object);
+        if (validations.size() != 0) {
+            StringBuffer buf = new StringBuffer();
+            ResourceBundle bundle = ResourceBundle.getBundle("messages");
+            for (ConstraintViolation<T> violation : validations) {
+                buf.append("-" + bundle.getString(violation.getPropertyPath().toString()));
+                buf.append(violation.getMessage() + "<BR>\n");
+            }
+            throw new DomainException(buf.toString());
+        }
         return (T) sess.merge(object);
 
     }

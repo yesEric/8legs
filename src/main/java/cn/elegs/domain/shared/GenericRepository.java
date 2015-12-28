@@ -27,7 +27,7 @@ public interface GenericRepository<T, PK extends Serializable> {
      * @param id 对象主键
      * @return 根据对象主键获得的对象
      */
-    T get(PK id);
+    T get(PK id) throws DomainException;
 
     /**
      * 判断对象是否存在.
@@ -44,7 +44,7 @@ public interface GenericRepository<T, PK extends Serializable> {
      * @param object 要保存的实体对象
      * @return 保存后的实体对象
      */
-    T save(T object);
+    T save(T object) throws DomainException;
 
 
     /**

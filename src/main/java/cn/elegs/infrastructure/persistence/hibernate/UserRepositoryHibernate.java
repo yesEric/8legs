@@ -1,6 +1,7 @@
 package cn.elegs.infrastructure.persistence.hibernate;
 
 import cn.elegs.domain.model.user.User;
+import cn.elegs.domain.model.user.UserExistException;
 import cn.elegs.domain.model.user.UserRepository;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -19,6 +20,17 @@ public class UserRepositoryHibernate extends GenericRepositoryHibernate<User, St
 
         User user = (User) this.getSession().createCriteria(User.class)
                 .add(Restrictions.eq("username", username)).uniqueResult();
+        return user;
+    }
+
+    @Override
+    public User save(User user) throws UserExistException {
+        this.getSession().saveOrUpdate(user);
+        try {
+            getSession().flush();
+        } catch (Exception de) {
+            throw new UserExistException();
+        }
         return user;
     }
 }

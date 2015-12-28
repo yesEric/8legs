@@ -1,6 +1,7 @@
 package cn.elegs.domain.model.role;
 
 import cn.elegs.domain.shared.ValueObject;
+import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +13,7 @@ public class Resource extends ValueObject<Resource> {
     /**
      * 资源名称
      */
+    @NotBlank
     String name;
     /**
      * 资源描述
@@ -20,14 +22,17 @@ public class Resource extends ValueObject<Resource> {
     /**
      * 资源请求动作，如:URL
      */
+    @NotBlank
     String action;
     /**
      * 排序
      */
+    @NotBlank
     int sortOrder;
     /**
      * 级别
      */
+    @NotBlank
     int level;
 
     /**

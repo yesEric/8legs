@@ -1,5 +1,6 @@
 package cn.elegs.interfaces.user.facade;
 
+import cn.elegs.domain.shared.DomainException;
 import cn.elegs.interfaces.user.facade.dto.UserDTO;
 
 import java.util.List;
@@ -9,13 +10,15 @@ import java.util.List;
  */
 public interface UserServiceFacade {
 
-    UserDTO createNewUser(String username, String password);
+    UserDTO createNewUser(String username, String password) throws DomainException;
 
     List<UserDTO> findAll();
 
     UserDTO getUserByName(String username);
 
-    UserDTO getUserById(String userId);
+    UserDTO getUserById(String userId) throws DomainException;
 
     void removeUser(String userId);
+
+    UserDTO assignRoleToUser(UserDTO user, String roleId[]) throws DomainException;
 }
