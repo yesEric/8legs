@@ -5,6 +5,7 @@ import cn.elegs.domain.shared.Entity;
 import org.apache.commons.lang3.Validate;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.Transient;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -154,6 +155,16 @@ public class User extends Entity<User> {
     public void changePwd(String password){
         Validate.notBlank(password,"Password can not be null!");
         this.password=password;
+    }
+
+    @Transient
+    public Set<String> getRoleIds() {
+        Set<String> roleIds = new HashSet<>();
+        for (Role role : getRoleSet()) {
+
+            roleIds.add(role.getId());
+        }
+        return roleIds;
     }
     @Override
     public boolean sameIdentityAs(User other) {

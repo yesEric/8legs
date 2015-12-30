@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+       default-lazy-init="true">
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="userAuthorityRealm"/>
+        <property name="cacheManager" ref="cacheManager"/>
+    </bean>
+    <!--shiroFilter要和web.xml中配置的一样-->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!--调用我们配置的权限管理器-->
+
+        <property name="securityManager" ref="securityManager"/>
+        <!--配置我们的登录请求URL-->
+        <property name="loginUrl" value="/login"/>
+        <!--配置登录成功后的跳转地址-->
+        <property name="successUrl" value="/user/list"/>
+        <!--配置拒绝访问的URL-->
+        <property name="unauthorizedUrl" value="/403.jsp"/>
+        <!--权限配置-->
+        <property name="filterChainDefinitions">
+            <value>
+                <!--anon表示不需要任何权限即可访问的地址-->
+                /statics/**=anon
+                <!--表示此URL需要有user:query的权限, user是角色名,query是权限名-->
+                /user/list=perms[user:query]
+                <!--所有请求都需要权限控制-->
+                /**=authc
+
+
+            </value>
+        </property>
+    </bean>
+
+    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"/>
+    <bean id="userAuthorityRealm" class="cn.elegs.domain.service.UserAuthorityRealm"/>
+
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+</beans>
