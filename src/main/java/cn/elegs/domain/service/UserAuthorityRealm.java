@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 用户权限验证Shiro.
@@ -35,21 +37,22 @@ public class UserAuthorityRealm extends AuthorizingRealm {
         String loginUsername = (String) principalCollection.fromRealm(this.getName()).iterator().next();
         //到数据库查找是否有这个用户
         User user = userRepository.getUserByName(loginUsername);
+        //权限对象info用来存放查找出的用户的所有角色(role)和权限(permission)
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        Set<String> perms = new HashSet<String>();
         if (user != null) {
-            //权限对象info用来存放查找出的用户的所有角色(role)和权限(permission)
-            SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-            //设置用户的角色集合
-            info.setRoles(user.getRoleIds());
+//            //设置用户的角色集合
+//            info.setRoles(user.getRoleIds());
             //增加用户角色对应的权限
             for (Role role : user.getRoleSet()) {
                 for (Resource resource : role.getResourceSet()) {
-                    info.addStringPermission(resource.getAction());
+                    String resourceId = resource.getId();
+                    perms.add(resourceId);
                 }
             }
-            return info;
-
         }
-        return null;
+        info.setStringPermissions(perms);
+        return info;
     }
 
     @Override
