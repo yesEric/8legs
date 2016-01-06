@@ -11,7 +11,7 @@
     </bean>
 
     <!-- Realm实现 -->
-    <bean id="userRealm" class="cn.elegs.domain.service.UserAuthorityRealm">
+    <bean id="userRealm" class="cn.elegs.interfaces.shiro.UserAuthorityRealm">
         <property name="cachingEnabled" value="false"/>
         <property name="authenticationCachingEnabled" value="true"/>
         <property name="authenticationCacheName" value="authenticationCache"/>
@@ -105,7 +105,7 @@
     </bean>
 
     <bean id="filterChainDefinitionMap"
-          class="cn.elegs.domain.service.ChainDefinitionSectionMetaSource">
+          class="cn.elegs.interfaces.shiro.ChainDefinitionSectionMetaSource">
         <!-- 默认的连接配置 -->
         <property name="filterChainDefinitions">
             <value>

@@ -29,8 +29,10 @@ public class UserRepositoryHibernate extends GenericRepositoryHibernate<User, St
         try {
             getSession().flush();
         } catch (Exception de) {
+            de.printStackTrace();
             throw new UserExistException();
         }
+
         return user;
     }
 }

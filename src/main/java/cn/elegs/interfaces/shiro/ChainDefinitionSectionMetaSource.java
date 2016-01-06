@@ -1,21 +1,19 @@
-package cn.elegs.domain.service;
+package cn.elegs.interfaces.shiro;
 
 import cn.elegs.domain.model.role.Resource;
 import cn.elegs.domain.model.role.ResourceRepository;
 import org.apache.shiro.config.Ini;
 import org.apache.shiro.config.Ini.Section;
-import org.apache.shiro.util.CollectionUtils;
 import org.apache.shiro.web.config.IniFilterChainResolverFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * Shiro 权限元数据.
  */
-@Service
 public class ChainDefinitionSectionMetaSource implements FactoryBean<Section> {
 
     @Autowired
@@ -33,11 +31,12 @@ public class ChainDefinitionSectionMetaSource implements FactoryBean<Section> {
      * @throws Exception
      */
     @Override
+    @Transactional
     public Section getObject() throws Exception {
         Ini ini = new Ini();
         ini.load(filterChainDefinitions);
         Section section = ini.getSection(IniFilterChainResolverFactory.URLS);
-        if (CollectionUtils.isEmpty(section)) {
+        if (section == null || section.isEmpty()) {
             section = ini.getSection(Ini.DEFAULT_SECTION_NAME);
         }
         List<Resource> resources = resourceRepository.getAll();
@@ -48,7 +47,7 @@ public class ChainDefinitionSectionMetaSource implements FactoryBean<Section> {
     }
 
     @Override
-    public Class<?> getObjectType() {
+    public Class<Section> getObjectType() {
         return Section.class;
     }
 

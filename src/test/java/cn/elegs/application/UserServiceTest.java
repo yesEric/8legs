@@ -17,7 +17,7 @@ public class UserServiceTest extends BaseApplicationTestCase {
     @Test
     public void testCreateUser() throws Exception {
 
-        User user = userService.createNewUser("Eric", "11111");
+        User user = userService.createNewUser("Bobo", "11111");
         assertNotNull(user.getId());
 
     }

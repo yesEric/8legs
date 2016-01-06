@@ -17,7 +17,7 @@ public class UserServiceFacadeTest extends BaseInterfacesTestCase {
 
     @Test
     public void testCreateNewUser() throws Exception {
-        UserDTO userDTO = userServiceFacade.createNewUser("Eric", "111");
+        UserDTO userDTO = userServiceFacade.createNewUser("Bobo", "111");
         assertNotNull(userDTO.getId());
     }
 }

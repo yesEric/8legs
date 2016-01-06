@@ -21,7 +21,7 @@ public class UserRepositoryTest extends BaseRepositoryTestCase {
      */
     @Test
     public void testAdd() throws Exception {
-        User user = new User("Eric", "111111");
+        User user = new User("Bobo", "111111");
         user = userRepository.save(user);
         log.debug(user);
         Assert.assertNotNull(user.getId());

@@ -1,4 +1,4 @@
-package cn.elegs.domain.service;
+package cn.elegs.interfaces.shiro;
 
 import cn.elegs.domain.model.role.Resource;
 import cn.elegs.domain.model.role.Role;
@@ -12,7 +12,6 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,7 +19,6 @@ import java.util.Set;
  * 用户权限验证Shiro.
  */
 @Service
-@Transactional
 public class UserAuthorityRealm extends AuthorizingRealm {
     @Autowired
     UserRepository userRepository;
@@ -62,10 +60,9 @@ public class UserAuthorityRealm extends AuthorizingRealm {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         //检查是否有此用户
         User user = userRepository.getUserByName(token.getUsername());
-        if (user != null) {
-            //若存在,则将此用户放到登录认证info中
-            return new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(), getName());
+        if (user == null) {
+            throw new UnknownAccountException();
         }
-        return null;
+        return new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(), getName());
     }
 }
