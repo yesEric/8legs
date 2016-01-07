@@ -42,5 +42,16 @@
         </row>
     </table>
 
-
+    <table name="t_resource">
+        <column>id</column>
+        <column>name</column>
+        <column>description</column>
+        <column>status</column>
+        <row>
+            <value description="id">-1</value>
+            <value description="name">ROLE_ADMIN</value>
+            <value description="description"><![CDATA[Administrator role (can edit Users)]]></value>
+            <value>ACTIVATED</value>
+        </row>
+    </table>
 </dataset>
