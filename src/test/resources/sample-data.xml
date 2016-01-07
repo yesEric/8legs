@@ -46,12 +46,28 @@
         <column>id</column>
         <column>name</column>
         <column>description</column>
-        <column>status</column>
+        <column>action</column>
+        <column>level</column>
+        <column>parent_id</column>
         <row>
             <value description="id">-1</value>
-            <value description="name">ROLE_ADMIN</value>
-            <value description="description"><![CDATA[Administrator role (can edit Users)]]></value>
-            <value>ACTIVATED</value>
+            <value description="name">UserAddd</value>
+            <value description="description"><![CDATA[Add User]]></value>
+            <value>/user/add</value>
+            <value>1</value>
+            <null/>
         </row>
     </table>
+
+    <table name="t_role_resource">
+        <column>id</column>
+        <column>resource_id</column>
+        <column>role_id</column>
+        <row>
+            <value description="id">-1</value>
+            <value description="user_id">-1</value>
+            <value description="role_id">-1</value>
+        </row>
+    </table>
+
 </dataset>

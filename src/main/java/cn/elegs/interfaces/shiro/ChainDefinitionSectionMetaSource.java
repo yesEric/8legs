@@ -2,6 +2,7 @@ package cn.elegs.interfaces.shiro;
 
 import cn.elegs.domain.model.role.Resource;
 import cn.elegs.domain.model.role.ResourceRepository;
+import cn.elegs.domain.model.role.Role;
 import org.apache.shiro.config.Ini;
 import org.apache.shiro.config.Ini.Section;
 import org.apache.shiro.web.config.IniFilterChainResolverFactory;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Shiro 权限元数据.
@@ -18,6 +20,7 @@ public class ChainDefinitionSectionMetaSource implements FactoryBean<Section> {
 
     @Autowired
     ResourceRepository resourceRepository;
+
     private String filterChainDefinitions;
 
     public void setFilterChainDefinitions(String filterChainDefinitions) {
@@ -41,11 +44,34 @@ public class ChainDefinitionSectionMetaSource implements FactoryBean<Section> {
         }
         List<Resource> resources = resourceRepository.getAll();
         for (Resource resource : resources) {
-            section.put(resource.getAction(), resource.getId());
+            //role["admin,user"]
+            Set<Role> roleSet = resource.getRoleSet();
+            if (!roleSet.isEmpty()) {
+                section.put(resource.getAction(), buildRoleArray(roleSet));
+
+            }
         }
         return section;
     }
 
+    private String buildRoleArray(Set<Role> roles) {
+
+        String preStr = "roles['";
+        String postStr = "']";
+        String roleStr = "";
+        for (Role role : roles) {
+            String roleId = role.getId();
+            roleStr += roleId + ",";
+        }
+
+        if (roleStr.length() >= 1) {
+            roleStr = roleStr.substring(0, roleStr.length() - 1);
+        }
+
+        roleStr = preStr + roleStr + postStr;
+        return roleStr;
+
+    }
     @Override
     public Class<Section> getObjectType() {
         return Section.class;

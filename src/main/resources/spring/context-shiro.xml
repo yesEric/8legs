@@ -92,18 +92,20 @@
     </bean>
 
     <!-- Shiro的Web过滤器 -->
-    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean" depends-on="roleOrFilter">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login.jsp"/>
         <property name="filters">
             <util:map>
+                <entry key="roleOrFilter" value-ref="roleOrFilter"/>
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
                 <entry key="logout" value-ref="logoutFilter"/>
             </util:map>
         </property>
         <property name="filterChainDefinitionMap" ref="filterChainDefinitionMap"/>
     </bean>
-
+    <bean id="roleOrFilter" class="cn.elegs.interfaces.shiro.RolesAuthorizationOrFilter"> <!--自定义的filter-->
+    </bean>
     <bean id="filterChainDefinitionMap"
           class="cn.elegs.interfaces.shiro.ChainDefinitionSectionMetaSource">
         <!-- 默认的连接配置 -->
@@ -112,11 +114,11 @@
                 /login.jsp = anon
                 /login = authc
                 /logout = logout
-                /authenticated = authc
+                /** = authc
             </value>
         </property>
     </bean>
-
+    <!-- /authenticated = authc 表示授权的才需要验证-->
     <!-- Shiro生命周期处理器-->
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 </beans>
