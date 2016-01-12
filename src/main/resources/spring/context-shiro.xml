@@ -111,6 +111,7 @@
         <!-- 默认的连接配置 -->
         <property name="filterChainDefinitions">
             <value>
+                /statics/**=anon
                 /login.jsp = anon
                 /login = authc
                 /logout = logout
