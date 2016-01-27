@@ -4,7 +4,7 @@ import cn.elegs.domain.shared.Entity;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
+import java.util.Set;
 
 /**
  * 产品信息模型.
@@ -50,10 +50,15 @@ public class Product extends Entity<Product> {
      * 产品品牌
      */
     ProductBrand productBrand;
+
+    /**
+     * 产品类型
+     */
+    ProductType productType;
     /**
      * 产品规格
      */
-    List<ProductVariation> variations;
+    Set<ProductVariation> variations;
 
     /**
      * 是否包邮
@@ -73,11 +78,11 @@ public class Product extends Entity<Product> {
     /**
      * 产品图片
      */
-    List<byte[]> images;
+    byte[] images;
     /**
      * 产品展示模版
      */
-    String displayTemplate;
+    ProductDisplayTemplate productDisplayTemplate;
     /**
      * 产品搜索关键字
      */
@@ -85,7 +90,17 @@ public class Product extends Entity<Product> {
     /**
      * 配件或搭配销售
      */
-    List<Product> bundles;
+    Set<Product> bundles;
+
+    Set<ProductPrice> productPrices;
+
+    public Set<ProductPrice> getProductPrices() {
+        return productPrices;
+    }
+
+    public void setProductPrices(Set<ProductPrice> productPrices) {
+        this.productPrices = productPrices;
+    }
 
     public String getName() {
         return name;
@@ -151,13 +166,7 @@ public class Product extends Entity<Product> {
         this.productBrand = productBrand;
     }
 
-    public List<ProductVariation> getVariations() {
-        return variations;
-    }
 
-    public void setVariations(List<ProductVariation> variations) {
-        this.variations = variations;
-    }
 
     public boolean isIncludeFreight() {
         return isIncludeFreight;
@@ -183,20 +192,25 @@ public class Product extends Entity<Product> {
         this.bpPerUnit = bpPerUnit;
     }
 
-    public List<byte[]> getImages() {
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+
+    public byte[] getImages() {
         return images;
     }
 
-    public void setImages(List<byte[]> images) {
-        this.images = images;
+    public ProductDisplayTemplate getProductDisplayTemplate() {
+        return productDisplayTemplate;
     }
 
-    public String getDisplayTemplate() {
-        return displayTemplate;
-    }
-
-    public void setDisplayTemplate(String displayTemplate) {
-        this.displayTemplate = displayTemplate;
+    public void setProductDisplayTemplate(ProductDisplayTemplate productDisplayTemplate) {
+        this.productDisplayTemplate = productDisplayTemplate;
     }
 
     public String getKeywords() {
@@ -207,11 +221,31 @@ public class Product extends Entity<Product> {
         this.keywords = keywords;
     }
 
-    public List<Product> getBundles() {
+    public Set<ProductVariation> getVariations() {
+        return variations;
+    }
+
+    public void setVariations(Set<ProductVariation> variations) {
+        this.variations = variations;
+    }
+
+    public void setIsIncludeFreight(boolean isIncludeFreight) {
+        this.isIncludeFreight = isIncludeFreight;
+    }
+
+    public void setIsSaleForOOS(boolean isSaleForOOS) {
+        this.isSaleForOOS = isSaleForOOS;
+    }
+
+    public void setImages(byte[] images) {
+        this.images = images;
+    }
+
+    public Set<Product> getBundles() {
         return bundles;
     }
 
-    public void setBundles(List<Product> bundles) {
+    public void setBundles(Set<Product> bundles) {
         this.bundles = bundles;
     }
 

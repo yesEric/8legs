@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+    <class name="cn.elegs.domain.model.product.ProductPrice" table="t_product_price">
+
+        <id name="id" column="id">
+            <generator class="org.hibernate.id.UUIDGenerator"/>
+        </id>
+
+        <property name="salePrice" column="sale_Price" unique="true"/>
+        <property name="cost" column="cost"/>
+        <property name="marketPrice" column="marketPrice"/>
+        <many-to-one name="product" column="product_id"/>
+
+    </class>
+</hibernate-mapping>
+          

@@ -2,6 +2,8 @@ package cn.elegs.domain.model.product;
 
 import cn.elegs.domain.shared.ValueObject;
 
+import java.util.Set;
+
 /**
  * 产品显示模版.
  */
@@ -15,6 +17,16 @@ public class ProductDisplayTemplate extends ValueObject<ProductDisplayTemplate> 
      * 模版URL
      */
     String url;
+
+    Set<Product> products;
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
 
     public String getName() {
         return name;

@@ -14,8 +14,13 @@
         <mapping resource="cn/elegs/infrastructure/persistence/hibernate/User.hbm.xml"/>
         <mapping resource="cn/elegs/infrastructure/persistence/hibernate/Role.hbm.xml"/>
         <mapping resource="cn/elegs/infrastructure/persistence/hibernate/Resource.hbm.xml"/>
-
-
+        <mapping resource="cn/elegs/infrastructure/persistence/hibernate/Product.hbm.xml"/>
+        <mapping resource="cn/elegs/infrastructure/persistence/hibernate/ProductCategory.hbm.xml"/>
+        <mapping resource="cn/elegs/infrastructure/persistence/hibernate/ProductBrand.hbm.xml"/>
+        <mapping resource="cn/elegs/infrastructure/persistence/hibernate/ProductVariation.hbm.xml"/>
+        <mapping resource="cn/elegs/infrastructure/persistence/hibernate/ProductDisplayTemplate.hbm.xml"/>
+        <mapping resource="cn/elegs/infrastructure/persistence/hibernate/ProductType.hbm.xml"/>
+        <mapping resource="cn/elegs/infrastructure/persistence/hibernate/ProductPrice.hbm.xml"/>
     </session-factory>
 
 </hibernate-configuration>

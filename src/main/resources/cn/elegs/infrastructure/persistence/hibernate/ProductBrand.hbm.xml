@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+    <class name="cn.elegs.domain.model.product.ProductBrand" table="t_product_brand">
+
+        <id name="id" column="id">
+            <generator class="org.hibernate.id.UUIDGenerator"/>
+        </id>
+
+        <property name="name" column="name" unique="true"/>
+        <property name="titleOnPage" column="title_On_Page"/>
+        <property name="metaKeywords" column="meta_Keywords"/>
+        <property name="metaDescription" column="meta_Description"/>
+        <property name="logo" column="logo"/>
+        <property name="alias" column="alias"/>
+        <property name="relatedFile" column="related_File"/>
+        <property name="pageTemplate" column="page_Template"/>
+
+
+        <set name="products" inverse="true">
+            <key column="product_category_id"></key>
+            <one-to-many class="cn.elegs.domain.model.product.Product"/>
+        </set>
+
+    </class>
+</hibernate-mapping>
+          

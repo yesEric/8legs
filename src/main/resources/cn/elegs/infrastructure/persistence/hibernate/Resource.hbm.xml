@@ -15,6 +15,7 @@
         <property name="level" column="level"/>
         <property name="action" column="action"/>
         <many-to-one name="parent" column="parent_id" cascade="all" class="cn.elegs.domain.model.role.Role"/>
+
         <set name="children" cascade="all" inverse="true">
             <key column="parent_id"></key>
             <one-to-many class="cn.elegs.domain.model.role.Resource"/>

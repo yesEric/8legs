@@ -7,6 +7,9 @@ import cn.elegs.domain.shared.ValueObject;
  */
 public class ProductPrice extends ValueObject<ProductPrice> {
 
+
+    Product product;
+
     /**
      * 销售价格
      */
@@ -19,6 +22,14 @@ public class ProductPrice extends ValueObject<ProductPrice> {
      * 市场价
      */
     Double marketPrice;
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
     public Double getSalePrice() {
         return salePrice;

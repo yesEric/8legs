@@ -3,7 +3,7 @@ package cn.elegs.domain.model.product;
 import cn.elegs.domain.shared.ValueObject;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Set;
 
 /**
  * 产品品牌.
@@ -28,7 +28,7 @@ public class ProductBrand  extends ValueObject<ProductBrand>{
     /**
      * 相关文件
      */
-    List<byte[]> relatedFiles;
+    byte[] relatedFile;
     /**
      * 模版页面
      */
@@ -45,6 +45,16 @@ public class ProductBrand  extends ValueObject<ProductBrand>{
      * SEO描述
      */
     String metaDescription;
+
+    Set<Product> products;
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
 
     public String getName() {
         return name;
@@ -78,12 +88,12 @@ public class ProductBrand  extends ValueObject<ProductBrand>{
         this.logo = logo;
     }
 
-    public List<byte[]> getRelatedFiles() {
-        return relatedFiles;
+    public byte[] getRelatedFile() {
+        return relatedFile;
     }
 
-    public void setRelatedFiles(List<byte[]> relatedFiles) {
-        this.relatedFiles = relatedFiles;
+    public void setRelatedFile(byte[] relatedFile) {
+        this.relatedFile = relatedFile;
     }
 
     public String getPageTemplate() {

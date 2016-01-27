@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping default-access="field">
+    <class name="cn.elegs.domain.model.product.Product" table="t_product">
+
+        <id name="id" column="id">
+            <generator class="org.hibernate.id.UUIDGenerator"/>
+        </id>
+
+        <property name="name" column="name" unique="true"/>
+        <property name="code" column="code"/>
+        <property name="description" column="description" not-null="false"/>
+        <property name="bpPerUnit" column="bp_per_unit"/>
+        <property name="freightTemplate" column="freight_template"/>
+        <property name="keywords" column="keywords"/>
+        <property name="unit" column="unit"/>
+        <property name="quantity" column="quantity"/>
+        <property name="isIncludeFreight" column="is_include_freight"/>
+        <property name="isSaleForOOS" column="is_Sale_For_OOS"/>
+        <many-to-one name="productCategory" column="product_category_id"/>
+        <many-to-one name="productBrand" column="product_brand_id"/>
+        <many-to-one name="productType" column="product_type_id"/>
+        <many-to-one name="productDisplayTemplate" column="product_display_template_id"/>
+        <set name="bundles" cascade="all" inverse="true">
+            <key column="bundle_product_id"></key>
+            <one-to-many class="cn.elegs.domain.model.product.Product"/>
+        </set>
+        <set name="variations" inverse="true">
+            <key column="product_variation_id"></key>
+            <one-to-many class="cn.elegs.domain.model.product.ProductVariation"/>
+        </set>
+
+        <set name="productPrices" inverse="true">
+            <key column="product_price_id"></key>
+            <one-to-many class="cn.elegs.domain.model.product.ProductPrice"/>
+        </set>
+
+    </class>
+</hibernate-mapping>
+          

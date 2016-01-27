@@ -4,6 +4,7 @@ import cn.elegs.domain.shared.ValueObject;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.Arrays;
+import java.util.Set;
 
 /**
  * 产品类型.
@@ -30,6 +31,11 @@ public class ProductCategory extends ValueObject<ProductCategory>{
      * 上级分类
      */
     ProductCategory parent;
+
+    Set<ProductCategory> children;
+
+    Set<Product> products;
+
 
     /**
      * logo
@@ -104,8 +110,24 @@ public class ProductCategory extends ValueObject<ProductCategory>{
         return isHidden;
     }
 
-    public void setHidden(boolean hidden) {
-        isHidden = hidden;
+    public void setIsHidden(boolean isHidden) {
+        this.isHidden = isHidden;
+    }
+
+    public Set<ProductCategory> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Set<ProductCategory> children) {
+        this.children = children;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
     }
 
     @Override

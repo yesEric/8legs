@@ -2,6 +2,8 @@ package cn.elegs.domain.model.product;
 
 import cn.elegs.domain.shared.ValueObject;
 
+import java.util.Set;
+
 /**
  * 产品类型.
  */
@@ -15,6 +17,17 @@ public class ProductType extends ValueObject<ProductType> {
      * 是否实体产品
      */
     boolean isSolid;
+
+    Set<Product> products;
+
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
 
     public String getName() {
         return name;
