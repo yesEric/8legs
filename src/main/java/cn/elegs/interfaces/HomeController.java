@@ -32,7 +32,7 @@ public class HomeController {
         }
         try {
             SecurityUtils.getSubject().login(new UsernamePasswordToken(user.getUsername(), user.getPassword()));
-            return "redirect:/user/list";
+            return "redirect:/index.jsp";
         } catch (AuthenticationException e) {
             redirectAttributes.addFlashAttribute("messages", "username or password error!!!");
             return "redirect:/login";
