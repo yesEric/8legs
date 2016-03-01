@@ -11,7 +11,7 @@
         <row>
             <value description="id">-1</value>
             <value description="username">Eric</value>
-            <value description="pwd">111111</value>
+            <value description="pwd">e10adc3949ba59abbe56e057f20f883e</value>
             <value description="full_name">Tomcat</value>
             <value description="status">ACTIVATED</value>
             <value description="locked">UNLOCKED</value>
