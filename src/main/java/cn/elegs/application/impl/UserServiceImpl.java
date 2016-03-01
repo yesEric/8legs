@@ -7,6 +7,7 @@ import cn.elegs.domain.model.role.RoleRepository;
 import cn.elegs.domain.model.user.User;
 import cn.elegs.domain.model.user.UserRepository;
 import cn.elegs.domain.shared.DomainException;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createNewUser(String username, String password) throws DomainException {
-        User user = new User(username, password);
+
+        User user = new User(username,  new SimpleHash("md5",password).toHex());
         return userRepository.save(user);
     }
 
