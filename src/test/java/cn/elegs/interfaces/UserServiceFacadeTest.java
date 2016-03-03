@@ -1,7 +1,7 @@
 package cn.elegs.interfaces;
 
-import cn.elegs.interfaces.user.facade.UserServiceFacade;
-import cn.elegs.interfaces.user.facade.dto.UserDTO;
+import cn.elegs.interfaces.system.user.facade.UserServiceFacade;
+import cn.elegs.interfaces.system.user.facade.dto.UserDTO;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

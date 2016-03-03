@@ -1,7 +1,7 @@
 package cn.elegs.controller;
 
 import cn.elegs.interfaces.HomeController;
-import cn.elegs.interfaces.user.facade.dto.UserDTO;
+import cn.elegs.interfaces.system.user.facade.dto.UserDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

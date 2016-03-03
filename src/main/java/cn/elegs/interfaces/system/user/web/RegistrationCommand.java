@@ -1,4 +1,4 @@
-package cn.elegs.interfaces.user.web;
+package cn.elegs.interfaces.system.user.web;
 
 /**
  * 用户注册命令.

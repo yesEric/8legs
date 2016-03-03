@@ -1,6 +1,6 @@
 package cn.elegs.interfaces;
 
-import cn.elegs.interfaces.user.facade.dto.UserDTO;
+import cn.elegs.interfaces.system.user.facade.dto.UserDTO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;

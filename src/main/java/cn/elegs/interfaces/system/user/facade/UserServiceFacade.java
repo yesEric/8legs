@@ -1,7 +1,7 @@
-package cn.elegs.interfaces.user.facade;
+package cn.elegs.interfaces.system.user.facade;
 
 import cn.elegs.domain.shared.DomainException;
-import cn.elegs.interfaces.user.facade.dto.UserDTO;
+import cn.elegs.interfaces.system.user.facade.dto.UserDTO;
 
 import java.util.List;
 

@@ -1,12 +1,12 @@
-package cn.elegs.interfaces.user.facade.internal;
+package cn.elegs.interfaces.system.user.facade.internal;
 
 import cn.elegs.application.UserService;
 import cn.elegs.domain.model.user.User;
 import cn.elegs.domain.model.user.UserRepository;
 import cn.elegs.domain.shared.DomainException;
-import cn.elegs.interfaces.user.facade.UserServiceFacade;
-import cn.elegs.interfaces.user.facade.dto.UserDTO;
-import cn.elegs.interfaces.user.facade.internal.assembler.UserDTOAssembler;
+import cn.elegs.interfaces.system.user.facade.UserServiceFacade;
+import cn.elegs.interfaces.system.user.facade.dto.UserDTO;
+import cn.elegs.interfaces.system.user.facade.internal.assembler.UserDTOAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

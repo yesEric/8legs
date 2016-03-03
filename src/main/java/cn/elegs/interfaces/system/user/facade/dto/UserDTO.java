@@ -1,4 +1,4 @@
-package cn.elegs.interfaces.user.facade.dto;
+package cn.elegs.interfaces.system.user.facade.dto;
 
 import cn.elegs.domain.model.role.Role;
 import cn.elegs.domain.model.user.LockStatus;

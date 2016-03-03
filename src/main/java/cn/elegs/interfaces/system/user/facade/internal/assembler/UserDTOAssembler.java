@@ -1,9 +1,9 @@
-package cn.elegs.interfaces.user.facade.internal.assembler;
+package cn.elegs.interfaces.system.user.facade.internal.assembler;
 
 import cn.elegs.domain.model.role.Role;
 import cn.elegs.domain.model.user.User;
-import cn.elegs.interfaces.user.facade.dto.RoleDTO;
-import cn.elegs.interfaces.user.facade.dto.UserDTO;
+import cn.elegs.interfaces.system.user.facade.dto.RoleDTO;
+import cn.elegs.interfaces.system.user.facade.dto.UserDTO;
 
 import java.util.ArrayList;
 import java.util.List;

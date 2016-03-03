@@ -1,10 +1,10 @@
-package cn.elegs.interfaces.user.web;
+package cn.elegs.interfaces.system.user.web;
 
 import cn.elegs.domain.model.user.UserExistException;
 import cn.elegs.domain.shared.DomainException;
 import cn.elegs.interfaces.shared.BaseController;
-import cn.elegs.interfaces.user.facade.UserServiceFacade;
-import cn.elegs.interfaces.user.facade.dto.UserDTO;
+import cn.elegs.interfaces.system.user.facade.UserServiceFacade;
+import cn.elegs.interfaces.system.user.facade.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +22,7 @@ import java.util.List;
  * 用户管理控制器.
  */
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/system/user")
 public class UserController extends BaseController {
 
     @Autowired

@@ -10,6 +10,9 @@
         <pattern>/index.jsp</pattern>
     </decorator>
     <decorator name="order_theme" page="order_theme.jsp">
-        <pattern>/order.jsp</pattern>
+        <pattern>/order/*</pattern>
+    </decorator>
+    <decorator name="system_theme" page="system_theme.jsp">
+        <pattern>/system/*</pattern>
     </decorator>
 </decorators>

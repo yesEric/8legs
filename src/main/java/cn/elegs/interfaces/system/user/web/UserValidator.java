@@ -1,4 +1,4 @@
-package cn.elegs.interfaces.user.web;
+package cn.elegs.interfaces.system.user.web;
 
 import org.apache.regexp.RE;
 import org.apache.regexp.RECompiler;
