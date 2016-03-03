@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="theme" content="basic_theme" />
+    <meta name="theme" content="order_theme" />
     <link rel="icon" href="<c:url value="/statics/images/favicon.ico"/>"/>
 
 
@@ -39,15 +39,15 @@
                 </div>
             </div>
             <div class="col-md-7">
-                <div class="navbar navbar-inverse" role="banner">
+                <div class="navbar " role="banner">
                     <nav class="collapse navbar-collapse bs-navbar-collapse navbar-left" role="navigation">
                         <ul class="nav navbar-nav">
                             <li >
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <fmt:message key="menu.site"/></a>
 
                             </li>
-                            <li >
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><fmt:message key="menu.order"/></a>
+                            <li class="current">
+                                <a href="#" class="dropdown-toggle current" data-toggle="dropdown"><fmt:message key="menu.order"/></a>
 
                             </li>
                             <li >
@@ -106,24 +106,46 @@
             <div class="sidebar content-box" style="display: block;">
                 <ul class="nav">
                     <!-- Main menu -->
-                    <li class="current"><a href="index.html"><i class="glyphicon glyphicon-home"></i> Dashboard</a></li>
-                    <li><a href="calendar.html"><i class="glyphicon glyphicon-calendar"></i> Calendar</a></li>
-                    <li><a href="stats.html"><i class="glyphicon glyphicon-stats"></i> Statistics (Charts)</a></li>
-                    <li><a href="tables.html"><i class="glyphicon glyphicon-list"></i> Tables</a></li>
-                    <li><a href="buttons.html"><i class="glyphicon glyphicon-record"></i> Buttons</a></li>
-                    <li><a href="editors.html"><i class="glyphicon glyphicon-pencil"></i> Editors</a></li>
-                    <li><a href="forms.html"><i class="glyphicon glyphicon-tasks"></i> Forms</a></li>
-                    <li class="submenu">
-                        <a href="#">
-                            <i class="glyphicon glyphicon-list"></i> Pages
-                            <span class="caret pull-right"></span>
-                        </a>
+                    <li class="current submenu">
+                        <a href="#"><i class="glyphicon glyphicon-shopping-cart"></i> <fmt:message key="menu.order.management"/> </a>
                         <!-- Sub menu -->
-                        <ul>
-                            <li><a href="login.html">Login</a></li>
-                            <li><a href="signup.html">Signup</a></li>
+                        <ul style="display: block">
+                            <li><a href="#"><fmt:message key="menu.order.management.list"/></a></li>
+
                         </ul>
                     </li>
+
+                    <li class="current submenu">
+                        <a href="#"><i class="glyphicon glyphicon-folder-open"></i> <fmt:message key="menu.order.bill"/> </a>
+                        <!-- Sub menu -->
+                        <ul style="display: block">
+                            <li><a href="#"><fmt:message key="menu.order.bill.charge"/></a></li>
+                            <li><a href="#"><fmt:message key="menu.order.bill.refund"/></a></li>
+                            <li><a href="#"><fmt:message key="menu.order.bill.settle"/></a></li>
+                            <li><a href="#"><fmt:message key="menu.order.bill.invoice"/></a></li>
+                            <li><a href="#"><fmt:message key="menu.order.bill.return"/></a></li>
+                        </ul>
+                    </li>
+
+                    <li class="current submenu">
+                        <a href="#"><i class="glyphicon glyphicon-heart-empty"></i> <fmt:message key="menu.order.ass.management"/> </a>
+                        <!-- Sub menu -->
+                        <ul style="display: block">
+                            <li><a href="#"><fmt:message key="menu.order.ass.setting"/></a></li>
+                            <li><a href="#"><fmt:message key="menu.order.ass.request"/></a></li>
+                            <li><a href="#"><fmt:message key="menu.order.ass.refund"/></a></li>
+                        </ul>
+                    </li>
+                    <li class="current submenu">
+                        <a href="#"><i class="glyphicon glyphicon-tag"></i> <fmt:message key="menu.order.delivery"/> </a>
+                        <!-- Sub menu -->
+                        <ul style="display: block">
+                            <li><a href="#"><fmt:message key="menu.order.delivery.template"/></a></li>
+                            <li><a href="#"><fmt:message key="menu.order.delivery.shipping"/></a></li>
+
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
         </div>

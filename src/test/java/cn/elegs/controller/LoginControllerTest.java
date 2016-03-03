@@ -48,7 +48,7 @@ public class LoginControllerTest extends BaseControllerTestCase {
 //        BindingResult errors=new DataBinder(userDTO).getBindingResult();
 
         // 构造http请求及期待响应行为
-        mockMvc.perform(post("/login").param("username", "Eric").param("password", "admin"))
+        mockMvc.perform(post("/login").param("username", "Eric").param("password", "123456"))
                 .andDo(print()) // 输出请求和响应信息
                 .andExpect(status().isFound())
                 .andExpect(view().name("redirect:/index.jsp"));

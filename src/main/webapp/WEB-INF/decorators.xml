@@ -6,7 +6,10 @@
         <pattern>/resources/*</pattern>
         <pattern>/login*</pattern>
     </excludes>
-    <decorator name="default" page="default.jsp">
-        <pattern>/*</pattern>
+    <decorator name="basic_theme" page="default.jsp">
+        <pattern>/index.jsp</pattern>
+    </decorator>
+    <decorator name="order_theme" page="order_theme.jsp">
+        <pattern>/order.jsp</pattern>
     </decorator>
 </decorators>
