@@ -29,7 +29,7 @@ public class UserController extends BaseController {
     UserServiceFacade userServiceFacade;
 
     final String FORM = "user/userForm";
-    final String LIST = "user/list";
+    final String LIST = "user/userList";
 
     public void initBinder(HttpServletRequest request,
                            ServletRequestDataBinder binder) {
