@@ -51,7 +51,7 @@
 
 
             <div class="content-box-large">
-
+                <decorator:body/>
 
             </div>
         </div>
