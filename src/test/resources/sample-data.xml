@@ -30,13 +30,19 @@
             <value description="description"><![CDATA[Administrator role (can edit Users)]]></value>
             <value>ACTIVATED</value>
         </row>
+        <row>
+            <value description="id">-2</value>
+            <value description="name">ROLE_USER</value>
+            <value description="description"><![CDATA[User role (can edit Users)]]></value>
+            <value>ACTIVATED</value>
+        </row>
     </table>
     <table name="t_user_role">
-        <column>id</column>
+
         <column>user_id</column>
         <column>role_id</column>
         <row>
-            <value description="id">-1</value>
+
             <value description="user_id">-1</value>
             <value description="role_id">-1</value>
         </row>

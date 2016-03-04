@@ -19,10 +19,6 @@
             </type>
         </property>
 
-        <set name="users" table="t_user_role">
-            <key column="user_id"></key>
-            <many-to-many class="cn.elegs.domain.model.user.User" column="id"/>
-        </set>
 
         <set name="resourceSet" table="t_role_resource">
             <key column="role_id"></key>

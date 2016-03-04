@@ -14,11 +14,21 @@
                    cssClass="form-horizontal">
     <form:hidden path="id"/>
     <spring:bind path="user.username"/>
+
             <div class="form-group">
                 <label for="username" class="col-sm-2 control-label"><fmt:message key="user.username"/> </label>
                 <div class="col-sm-4">
 
-                    <form:input cssClass="form-control" path="username" id="username" disabled="disabled"/>
+                    <form:input cssClass="form-control" path="username" id="username"
+                                disabled="${user.id!=null? 'true':'false'}"/>
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fullName" class="col-sm-2 control-label"><fmt:message key="user.fullName"/> </label>
+                <div class="col-sm-4">
+
+                    <form:input cssClass="form-control" path="fullName" id="fullName"/>
 
                 </div>
             </div>
@@ -35,7 +45,8 @@
                     <c:forEach items="${roles}" var="role">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="${role.id}" name="roleId"> ${role.name}
+                                <input type="checkbox" value="${role.id}"
+                                       name="roleId" ${user.roleDTOs.contains(role) ? "checked":""}> ${role.name}
                             </label>
                         </div>
                     </c:forEach>

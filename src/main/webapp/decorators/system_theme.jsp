@@ -48,9 +48,10 @@
             </div>
         </div>
         <div class="col-md-10">
-
+            <%@ include file="/common/message.jsp" %>
 
             <div class="content-box-large">
+
                 <decorator:body/>
 
             </div>

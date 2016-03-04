@@ -71,7 +71,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/save")
     public String save(@Valid @ModelAttribute("user") final UserDTO userDTO, final BindingResult errors,
-                       Model model, @RequestParam(value = "roleId") String roleIds[]) {
+                       Model model, @RequestParam(value = "roleId") String roleIds[], final HttpServletRequest request) {
         UserDTO user = null;
         try {
             user = userServiceFacade.updateUser(userDTO);
@@ -83,8 +83,11 @@ public class UserController extends BaseController {
             errors.reject(de.getMessage());
             return FORM;
         }
-
+        List<RoleDTO> roles = userServiceFacade.findAllRoles();
+        model.addAttribute("roles", roles);
         model.addAttribute("user", user);
+
+        saveMessage(request, getText("user.saved", user.getFullName(), request.getLocale()));
         return FORM;
     }
 

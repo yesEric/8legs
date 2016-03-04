@@ -1,6 +1,5 @@
 package cn.elegs.domain.model.role;
 
-import cn.elegs.domain.model.user.User;
 import cn.elegs.domain.shared.Entity;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -24,7 +23,6 @@ public class Role extends Entity<Role> {
 
     RoleStatus roleStatus;
 
-    Set<User> users = new HashSet<>();
 
     Set<Resource> resourceSet = new HashSet<>();
 
@@ -44,13 +42,7 @@ public class Role extends Entity<Role> {
         this.roleStatus = roleStatus;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
 
     public String getName() {
         return name;
