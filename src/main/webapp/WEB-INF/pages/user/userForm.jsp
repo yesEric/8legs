@@ -17,7 +17,8 @@
             <div class="form-group">
                 <label for="username" class="col-sm-2 control-label"><fmt:message key="user.username"/> </label>
                 <div class="col-sm-4">
-                    <form:input cssClass="form-control" path="username" id="username"/>
+
+                    <form:input cssClass="form-control" path="username" id="username" disabled="disabled"/>
 
                 </div>
             </div>
@@ -29,7 +30,19 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <c:forEach items="${roles}" var="role">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="${role.id}" name="roleId"> ${role.name}
+                            </label>
+                        </div>
+                    </c:forEach>
 
+
+                </div>
+            </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-primary"><fmt:message key="button.save"/></button>

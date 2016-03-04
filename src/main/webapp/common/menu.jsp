@@ -1,6 +1,6 @@
 <div class="header fixed-top">
-    <div class="container">
-        <div>
+
+    <div>
             <div class="col-md-2">
                 <!-- Logo -->
                 <div class="logo">
@@ -71,5 +71,5 @@
                 </div>
             </div>
         </div>
-    </div>
+
 </div>

@@ -20,7 +20,7 @@
         </property>
 
         <set name="users" table="t_user_role">
-            <key column="role_id"></key>
+            <key column="user_id"></key>
             <many-to-many class="cn.elegs.domain.model.user.User" column="id"/>
         </set>
 

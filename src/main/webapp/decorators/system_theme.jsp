@@ -39,7 +39,7 @@
                         <a href="#"><i class="glyphicon glyphicon-user"></i> <fmt:message key="menu.system.user"/> </a>
                         <!-- Sub menu -->
                         <ul style="display: block">
-                            <li><a href="#"><fmt:message key="menu.system.user"/></a></li>
+                            <li><a href="${ctx}/system/user/list"><fmt:message key="menu.system.user"/></a></li>
                             <li><a href="#"><fmt:message key="menu.system.role"/></a></li>
 
                         </ul>

@@ -4,6 +4,7 @@ import cn.elegs.domain.model.user.UserExistException;
 import cn.elegs.domain.shared.DomainException;
 import cn.elegs.interfaces.shared.BaseController;
 import cn.elegs.interfaces.system.user.facade.UserServiceFacade;
+import cn.elegs.interfaces.system.user.facade.dto.RoleDTO;
 import cn.elegs.interfaces.system.user.facade.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,9 +50,40 @@ public class UserController extends BaseController {
         UserDTO user = new UserDTO();
         try {
             user = userServiceFacade.getUserById(id);
+            List<RoleDTO> roles = userServiceFacade.findAllRoles();
+            model.addAttribute("roles", roles);
         } catch (DomainException e) {
-            log.error("Cannot find user");
+            log.error(e.getMessage());
         }
+        model.addAttribute("id", id);
+        model.addAttribute("user", user);
+        return FORM;
+    }
+
+    /**
+     * 新增用户信息
+     *
+     * @param userDTO
+     * @param errors
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping(value = "/save")
+    public String save(@Valid @ModelAttribute("user") final UserDTO userDTO, final BindingResult errors,
+                       Model model, @RequestParam(value = "roleId") String roleIds[]) {
+        UserDTO user = null;
+        try {
+            user = userServiceFacade.updateUser(userDTO);
+            user = userServiceFacade.assignRoleToUser(user, roleIds);
+        } catch (UserExistException e) {
+            errors.rejectValue("username", "error.existing.user", new Object[]{user.getUsername()}, "");
+            return FORM;
+        } catch (DomainException de) {
+            errors.reject(de.getMessage());
+            return FORM;
+        }
+
         model.addAttribute("user", user);
         return FORM;
     }
@@ -65,9 +97,9 @@ public class UserController extends BaseController {
      * @return
      * @throws Exception
      */
-    @RequestMapping(value = "/save")
-    public String save(@Valid @ModelAttribute("user") final UserDTO userDTO, final BindingResult errors,
-                       Model model, @RequestParam(value = "roleId") String roleIds[]) {
+    @RequestMapping(value = "/add")
+    public String add(@Valid @ModelAttribute("user") final UserDTO userDTO, final BindingResult errors,
+                      Model model, @RequestParam(value = "roleId") String roleIds[]) {
         UserDTO user = null;
         try {
             user = userServiceFacade.createNewUser(userDTO.getUsername(), userDTO.getPassword());
@@ -83,7 +115,6 @@ public class UserController extends BaseController {
         model.addAttribute("user", user);
         return FORM;
     }
-
     /**
      * 显示用户列表
      *
@@ -94,7 +125,9 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/list")
     public String list(Model model) {
         List<UserDTO> users = userServiceFacade.findAll();
+
         model.addAttribute("users", users);
+
         return LIST;
     }
 

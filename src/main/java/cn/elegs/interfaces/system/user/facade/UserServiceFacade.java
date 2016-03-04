@@ -1,6 +1,7 @@
 package cn.elegs.interfaces.system.user.facade;
 
 import cn.elegs.domain.shared.DomainException;
+import cn.elegs.interfaces.system.user.facade.dto.RoleDTO;
 import cn.elegs.interfaces.system.user.facade.dto.UserDTO;
 
 import java.util.List;
@@ -21,4 +22,8 @@ public interface UserServiceFacade {
     void removeUser(String userId) throws DomainException;
 
     UserDTO assignRoleToUser(UserDTO user, String roleId[]) throws DomainException;
+
+    List<RoleDTO> findAllRoles();
+
+    UserDTO updateUser(UserDTO userDTO) throws DomainException;
 }

@@ -1,11 +1,15 @@
 package cn.elegs.interfaces.system.user.facade.internal;
 
 import cn.elegs.application.UserService;
+import cn.elegs.domain.model.role.Role;
+import cn.elegs.domain.model.role.RoleRepository;
 import cn.elegs.domain.model.user.User;
 import cn.elegs.domain.model.user.UserRepository;
 import cn.elegs.domain.shared.DomainException;
 import cn.elegs.interfaces.system.user.facade.UserServiceFacade;
+import cn.elegs.interfaces.system.user.facade.dto.RoleDTO;
 import cn.elegs.interfaces.system.user.facade.dto.UserDTO;
+import cn.elegs.interfaces.system.user.facade.internal.assembler.RoleDTOAssembler;
 import cn.elegs.interfaces.system.user.facade.internal.assembler.UserDTOAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +27,9 @@ public class UserServiceFacadeImpl implements UserServiceFacade {
     UserService userService;
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
 
     @Override
     public UserDTO createNewUser(String username, String password) throws DomainException {
@@ -68,6 +75,27 @@ public class UserServiceFacadeImpl implements UserServiceFacade {
         User user = userRepository.get(userDTO.getId());
         user = userService.assignRoleToUser(user, roleIds);
         final UserDTOAssembler assembler = new UserDTOAssembler();
+        return assembler.toDTO(user);
+    }
+
+    @Override
+    public List<RoleDTO> findAllRoles() {
+        List<Role> roleList = roleRepository.getAll();
+        List<RoleDTO> roleDTOList = new ArrayList<>();
+        final RoleDTOAssembler assembler = new RoleDTOAssembler();
+        for (Role role : roleList) {
+            roleDTOList.add(assembler.toDTO(role));
+        }
+        return roleDTOList;
+    }
+
+    @Override
+    public UserDTO updateUser(UserDTO userDTO) throws DomainException {
+        User user = userRepository.get(userDTO.getId());
+        user.setFullName(userDTO.getFullName());
+        user.setPassword(userDTO.getPassword());
+        user = userRepository.save(user);
+        UserDTOAssembler assembler = new UserDTOAssembler();
         return assembler.toDTO(user);
     }
 }
