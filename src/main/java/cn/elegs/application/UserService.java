@@ -15,7 +15,7 @@ public interface UserService {
      * @param password 密码
      * @return 创建后的用户对象
      */
-    public User createNewUser(String username, String password) throws DomainException;
+    public User createNewUser(String username, String password, String fullName) throws DomainException;
 
     /**
      * 删除用户

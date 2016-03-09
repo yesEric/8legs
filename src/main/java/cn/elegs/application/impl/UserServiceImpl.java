@@ -29,9 +29,9 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User createNewUser(String username, String password) throws DomainException {
+    public User createNewUser(String username, String password, String fullName) throws DomainException {
 
-        User user = new User(username,  new SimpleHash("md5",password).toHex());
+        User user = new User(username, new SimpleHash("md5", password).toHex(), fullName);
         return userRepository.save(user);
     }
 

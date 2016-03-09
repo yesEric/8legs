@@ -18,9 +18,15 @@
             <div class="form-group">
                 <label for="username" class="col-sm-2 control-label"><fmt:message key="user.username"/> </label>
                 <div class="col-sm-4">
+                    <c:if test="${user.id==null}">
+                        <form:input cssClass="form-control" path="username" id="username"/>
+                    </c:if>
 
-                    <form:input cssClass="form-control" path="username" id="username"
-                                disabled="${user.id!=null? 'true':'false'}"/>
+                    <c:if test="${user.id!=null}">
+                        <form:input cssClass="form-control" path="username" id="username" disabled="true"/>
+                        <form:hidden path="username"/>
+                    </c:if>
+
 
                 </div>
             </div>

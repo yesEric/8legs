@@ -3,8 +3,11 @@ package cn.elegs.infrastructure.persistence.hibernate;
 import cn.elegs.domain.model.user.User;
 import cn.elegs.domain.model.user.UserExistException;
 import cn.elegs.domain.model.user.UserRepository;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * UserRepository 的Hibernate实现.
@@ -34,5 +37,12 @@ public class UserRepositoryHibernate extends GenericRepositoryHibernate<User, St
         }
 
         return user;
+    }
+
+    @Override
+    public List<User> search(String username) {
+        List<User> users = getSession().createCriteria(User.class)
+                .add(Restrictions.like("username", username, MatchMode.ANYWHERE)).list();
+        return users;
     }
 }

@@ -51,7 +51,7 @@
             <%@ include file="/common/message.jsp" %>
 
             <div class="content-box-large">
-
+                <legend><decorator:title/></legend>
                 <decorator:body/>
 
             </div>

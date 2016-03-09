@@ -47,6 +47,9 @@ public class User extends Entity<User> {
     }
 
     public User() {
+        this.createdAt = new Date();
+        this.status = UserStatus.ACTIVATED;
+        this.locked = LockStatus.UNLOCKED;
     }
 
     /**
@@ -64,11 +67,13 @@ public class User extends Entity<User> {
         this.setRoleSet(roles);
         return this;
     }
-    public User(String username, String password) {
+
+    public User(String username, String password, String fullName) {
         Validate.notBlank(username,"Username can not be null!");
         Validate.notNull(password,"Password can not be null!");
         this.username = username;
         this.password = password;
+        this.fullName = fullName;
         this.createdAt=new Date();
         this.status=UserStatus.ACTIVATED;
         this.locked=LockStatus.UNLOCKED;

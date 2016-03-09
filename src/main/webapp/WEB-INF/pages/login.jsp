@@ -13,54 +13,73 @@
     <title>Login</title>
 
 
+    <link rel="icon" href="<c:url value="/statics/images/favicon.ico"/>"/>
+
+
     <!-- Bootstrap Core CSS -->
     <link href="${ctx}/statics/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- MetisMenu CSS -->
-    <link href="${ctx}/statics/css/metisMenu.min.css" rel="stylesheet">
+    <link href="${ctx}/statics/css/bootstrap-theme.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="${ctx}/statics/css/sb-admin-2.css" rel="stylesheet">
+    <link href="${ctx}/statics/css/styles.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="${ctx}/statics/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body class="login-bg">
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Logo -->
+                <div class="logo">
+                    <h1><a href="index.html"><fmt:message key="webapp.name"/> </a></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<div class="container">
+
+<div class="page-content container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <div class="login-panel panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Please Sign In</h3>
+            <div class="login-wrapper">
+                <div class="box">
+                    <div class="content-wrap">
+                        <h6><fmt:message key="login.title"/></h6>
+
+                        <%@ include file="/common/message.jsp" %>
+
+                        <form:form commandName="user" method="post" action="/login" autocomplete="off">
+                            <fieldset>
+                                <div class="form-group">
+
+                                    <form:input cssClass="form-control" path="username" id="username"
+                                                placeholder="User Name"/>
+                                </div>
+                                <div class="form-group">
+
+                                    <form:password cssClass="form-control" path="password" id="password"
+                                                   placeholder="Password"/>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                    </label>
+                                </div>
+
+                                <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
+                            </fieldset>
+                        </form:form>
+                    </div>
                 </div>
-                <div class="panel-body">
-                   <form:form commandName="user" method="post" action="/login" autocomplete="off">
-                        <fieldset>
-                            <div class="form-group">
 
-                                <form:input cssClass="form-control" path="username" id="username" placeholder="User Name"/>
-                            </div>
-                            <div class="form-group">
 
-                                <form:password cssClass="form-control"  path="password" id="password" placeholder="Password"/>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                    <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                </label>
-                            </div>
-
-                            <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
-                        </fieldset>
-                   </form:form>
-
-                </div>
             </div>
         </div>
     </div>

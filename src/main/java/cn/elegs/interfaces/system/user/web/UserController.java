@@ -71,16 +71,23 @@ public class UserController extends BaseController {
      */
     @RequestMapping(value = "/save")
     public String save(@Valid @ModelAttribute("user") final UserDTO userDTO, final BindingResult errors,
-                       Model model, @RequestParam(value = "roleId") String roleIds[], final HttpServletRequest request) {
+                       Model model, @RequestParam(value = "roleId", required = false) String roleIds[], final HttpServletRequest request) {
+        if (roleIds == null) {
+            saveError(request, getText("user.roles.error.empty", request.getLocale()));
+            return FORM;
+        }
         UserDTO user = null;
         try {
-            user = userServiceFacade.updateUser(userDTO);
+            user = userServiceFacade.saveUser(userDTO);
             user = userServiceFacade.assignRoleToUser(user, roleIds);
         } catch (UserExistException e) {
-            errors.rejectValue("username", "error.existing.user", new Object[]{user.getUsername()}, "");
+
+            saveError(request, getText("user.error.existing", new Object[]{user.getUsername()}, request.getLocale()));
+
             return FORM;
         } catch (DomainException de) {
-            errors.reject(de.getMessage());
+
+            saveError(request, de.getMessage());
             return FORM;
         }
         List<RoleDTO> roles = userServiceFacade.findAllRoles();
@@ -94,27 +101,15 @@ public class UserController extends BaseController {
     /**
      * 保存用户信息
      *
-     * @param userDTO
-     * @param errors
      * @param model
      * @return
      * @throws Exception
      */
     @RequestMapping(value = "/add")
-    public String add(@Valid @ModelAttribute("user") final UserDTO userDTO, final BindingResult errors,
-                      Model model, @RequestParam(value = "roleId") String roleIds[]) {
-        UserDTO user = null;
-        try {
-            user = userServiceFacade.createNewUser(userDTO.getUsername(), userDTO.getPassword());
-            user = userServiceFacade.assignRoleToUser(user, roleIds);
-        } catch (UserExistException e) {
-            errors.rejectValue("username", "error.existing.user", new Object[]{user.getUsername()}, "");
-            return FORM;
-        } catch (DomainException de) {
-            errors.reject(de.getMessage());
-            return FORM;
-        }
-
+    public String add(Model model) {
+        UserDTO user = new UserDTO();
+        List<RoleDTO> roles = userServiceFacade.findAllRoles();
+        model.addAttribute("roles", roles);
         model.addAttribute("user", user);
         return FORM;
     }
@@ -128,7 +123,8 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/list")
     public String list(Model model) {
         List<UserDTO> users = userServiceFacade.findAll();
-
+        UserDTO user = new UserDTO();
+        model.addAttribute("user", user);
         model.addAttribute("users", users);
 
         return LIST;
@@ -154,5 +150,13 @@ public class UserController extends BaseController {
         return LIST;
     }
 
+    @RequestMapping(value = "/search")
+    public String search(@ModelAttribute("user") final UserDTO userDTO, Model model, final BindingResult errors) {
 
+        List<UserDTO> users = userServiceFacade.searchUser(userDTO);
+        UserDTO user = new UserDTO();
+        model.addAttribute("user", user);
+        model.addAttribute("users", users);
+        return LIST;
+    }
 }

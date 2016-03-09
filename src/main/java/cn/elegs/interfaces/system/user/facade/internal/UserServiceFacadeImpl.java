@@ -11,6 +11,8 @@ import cn.elegs.interfaces.system.user.facade.dto.RoleDTO;
 import cn.elegs.interfaces.system.user.facade.dto.UserDTO;
 import cn.elegs.interfaces.system.user.facade.internal.assembler.RoleDTOAssembler;
 import cn.elegs.interfaces.system.user.facade.internal.assembler.UserDTOAssembler;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +34,8 @@ public class UserServiceFacadeImpl implements UserServiceFacade {
     RoleRepository roleRepository;
 
     @Override
-    public UserDTO createNewUser(String username, String password) throws DomainException {
-        final User user = userService.createNewUser(username, password);
+    public UserDTO createNewUser(String username, String password, String fullName) throws DomainException {
+        final User user = userService.createNewUser(username, password, fullName);
         final UserDTOAssembler assembler = new UserDTOAssembler();
         return assembler.toDTO(user);
     }
@@ -90,12 +92,27 @@ public class UserServiceFacadeImpl implements UserServiceFacade {
     }
 
     @Override
-    public UserDTO updateUser(UserDTO userDTO) throws DomainException {
-        User user = userRepository.get(userDTO.getId());
+    public UserDTO saveUser(UserDTO userDTO) throws DomainException {
+        User user = new User(userDTO.getUsername(), userDTO.getPassword(), userDTO.getFullName());
+        if (!StringUtils.isEmpty(userDTO.getId())) {
+            user = userRepository.get(userDTO.getId());
+        }
+        user.setPassword(new SimpleHash("md5", userDTO.getPassword()).toHex());
         user.setFullName(userDTO.getFullName());
-        user.setPassword(userDTO.getPassword());
         user = userRepository.save(user);
         UserDTOAssembler assembler = new UserDTOAssembler();
         return assembler.toDTO(user);
+    }
+
+    @Override
+    public List<UserDTO> searchUser(UserDTO userDTO) {
+        List<User> users = userRepository.search(userDTO.getUsername());
+        final List<UserDTO> userDTOList = new ArrayList<>();
+        final UserDTOAssembler assembler = new UserDTOAssembler();
+        for (User user : users) {
+            userDTOList.add(assembler.toDTO(user));
+        }
+        return userDTOList;
+
     }
 }
