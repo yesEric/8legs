@@ -47,9 +47,10 @@ public class UserController extends BaseController {
      * @throws Exception
      */
     @RequestMapping(value = "/show")
-    public String show(@RequestParam(value = "id", required = false) String id, Model model) {
+    public String show(@RequestParam(value = "id", required = false) String id, Model model, final HttpServletRequest request) {
         if (id == null) {
-            return "redirect:/system/user/list";
+            saveError(request, getText("object.show.error", request.getLocale()));
+            return list(model);
         }
         UserDTO user = new UserDTO();
         try {
@@ -149,13 +150,14 @@ public class UserController extends BaseController {
     @RequestMapping(value = "/remove")
     public String remove(@RequestParam(value = "id", required = false) String userId, Model model, final HttpServletRequest request) {
         if (userId == null) {
-            saveError(request, "Nothing to delete!");
+            saveError(request, getText("object.delete.error", request.getLocale()));
             return list(model);
         }
         try {
             UserDTO userDTO = userServiceFacade.getUserById(userId);
-            if (userDTO.getUsername().equals(SecurityUtils.getSubject().toString())) {
-                saveError(request, "Cannot delete current user!");
+            if (userDTO.getUsername().equals(SecurityUtils.getSubject().getPrincipal().toString())) {
+                saveError(request, getText("user.current.delete.error", request.getLocale()));
+                return list(model);
             }
             userServiceFacade.removeUser(userId);
         } catch (DomainException e) {

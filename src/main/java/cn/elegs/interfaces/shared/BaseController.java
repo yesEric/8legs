@@ -37,6 +37,7 @@ public class BaseController {
         request.getSession().setAttribute(ERRORS_MESSAGES_KEY, errors);
     }
 
+
     @SuppressWarnings("unchecked")
     public void saveMessage(HttpServletRequest request, String msg) {
         List messages = (List) request.getSession().getAttribute(MESSAGES_KEY);
