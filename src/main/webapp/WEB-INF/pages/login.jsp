@@ -67,12 +67,13 @@
                                     <form:password cssClass="form-control" path="password" id="password"
                                                    placeholder="Password"/>
                                 </div>
+
                                 <div class="checkbox">
                                     <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
+                                        <input name="rememberMe" id="rememberMe" type="checkbox"><fmt:message
+                                            key="login.rememberMe"/>
                                     </label>
                                 </div>
-
                                 <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
                             </fieldset>
                         </form:form>

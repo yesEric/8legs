@@ -5,6 +5,7 @@
 </head>
 <body>
 
+
 <form:form commandName="user" method="post" action="${ctx}/system/user/search" autocomplete="off"
            cssClass="form-horizontal">
 
@@ -38,8 +39,14 @@
         <a href="${ctx}/system/user/show?id=${user.id}" class="btn btn-primary btn-sm"><fmt:message
                 key="button.edit"/> </a>
 
-        <a href="${ctx}/system/user/remove?id=${user.id}" class="btn btn-danger btn-sm"><fmt:message
-                key="button.delete"/> </a>
+
+        <c:if test="${!currentUser.equals(user.username)}">
+            <a href="#" class="btn btn-danger btn-sm" onclick="confirmAction('
+                <spring:message code="message.confirmAction"
+                                arguments="${user.username}"/> ','${ctx}/system/user/remove?id=${user.id}')"><fmt:message
+                    key="button.delete"/> </a>
+        </c:if>
+
     </display:column>
 
 </display:table>

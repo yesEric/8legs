@@ -6,6 +6,7 @@ import cn.elegs.interfaces.shared.BaseController;
 import cn.elegs.interfaces.system.user.facade.UserServiceFacade;
 import cn.elegs.interfaces.system.user.facade.dto.RoleDTO;
 import cn.elegs.interfaces.system.user.facade.dto.UserDTO;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,7 +47,10 @@ public class UserController extends BaseController {
      * @throws Exception
      */
     @RequestMapping(value = "/show")
-    public String show(@RequestParam("id") String id, Model model) {
+    public String show(@RequestParam(value = "id", required = false) String id, Model model) {
+        if (id == null) {
+            return "redirect:/system/user/list";
+        }
         UserDTO user = new UserDTO();
         try {
             user = userServiceFacade.getUserById(id);
@@ -114,6 +118,7 @@ public class UserController extends BaseController {
         model.addAttribute("user", user);
         return FORM;
     }
+
     /**
      * 显示用户列表
      *
@@ -127,6 +132,8 @@ public class UserController extends BaseController {
         UserDTO user = new UserDTO();
         model.addAttribute("user", user);
         model.addAttribute("users", users);
+        String currentUser = SecurityUtils.getSubject().getPrincipal().toString();
+        model.addAttribute("currentUser", currentUser);
 
         return LIST;
     }
@@ -140,11 +147,19 @@ public class UserController extends BaseController {
      * @throws Exception
      */
     @RequestMapping(value = "/remove")
-    public String remove(@RequestParam(value = "id") String userId, Model model, final BindingResult errors) {
+    public String remove(@RequestParam(value = "id", required = false) String userId, Model model, final HttpServletRequest request) {
+        if (userId == null) {
+            saveError(request, "Nothing to delete!");
+            return list(model);
+        }
         try {
+            UserDTO userDTO = userServiceFacade.getUserById(userId);
+            if (userDTO.getUsername().equals(SecurityUtils.getSubject().toString())) {
+                saveError(request, "Cannot delete current user!");
+            }
             userServiceFacade.removeUser(userId);
         } catch (DomainException e) {
-            errors.reject(e.getMessage());
+            saveError(request, e.getMessage());
         }
         List<UserDTO> users = userServiceFacade.findAll();
         model.addAttribute("users", users);

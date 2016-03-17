@@ -1,12 +1,14 @@
 package cn.elegs.application.impl;
 
 import cn.elegs.application.UserService;
+import cn.elegs.application.util.MessageUtil;
 import cn.elegs.domain.model.operationLog.OperationLogRepository;
 import cn.elegs.domain.model.role.Role;
 import cn.elegs.domain.model.role.RoleRepository;
 import cn.elegs.domain.model.user.User;
 import cn.elegs.domain.model.user.UserRepository;
 import cn.elegs.domain.shared.DomainException;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +51,12 @@ public class UserServiceImpl implements UserService {
                 throw new DomainException("User cannot be removed, since there is some operations relate to!");
             }
 
+        }
+        String currentLoginUsername = SecurityUtils.getSubject().getPrincipal().toString();
+        if (currentLoginUsername.equals(user.getUsername())) {
+            MessageUtil mu = new MessageUtil();
+
+            throw new DomainException(mu.getText("error.delete.currentUser"));
         }
         userRepository.remove(userId);
     }

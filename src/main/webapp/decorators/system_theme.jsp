@@ -63,7 +63,7 @@
     <div class="container ">
 
         <div class="copy text-center">
-            Copyright 2014 <a href='#'>Website</a>
+            Copyright 2015 <a href='#'>www.elegs.com</a>
         </div>
 
     </div>
@@ -78,9 +78,8 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="${ctx}/statics/js/bootstrap.min.js"></script>
 
-<!-- Metis Menu Plugin JavaScript -->
 <script src="${ctx}/statics/js/custom.js"></script>
 
-
+<script src="${ctx}/statics/js/8legs.js"></script>
 </body>
 </html>
